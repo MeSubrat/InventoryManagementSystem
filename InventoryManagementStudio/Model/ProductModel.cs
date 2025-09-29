@@ -12,19 +12,17 @@ namespace InventoryManagementStudio.Model
         public string Name { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
-        public string CreatedBy { get; set; }
+        public string OwnerUserId { get; set; }
 
-        public ProductModel(string id,string name,double price, int quantity, string createdBy)
+        public ProductModel(string name,double price, int quantity)
         {
-            Id = id;
             Name = name;
             Price = price;
             Quantity = quantity;
-            CreatedBy = createdBy;
         }
         public override string ToString()
         {
-            return $"ProductId: {Id}, Product Name: {Name}, Product Price: {Price},Available Quantity: {Quantity}, Created By: {CreatedBy}";
+            return $"ProductId: {Id}, Product Name: {Name}, Product Price: {Price},Available Quantity: {Quantity}, Created By: {OwnerUserId}";
         }
     }
 }
