@@ -43,7 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\IDataStore.cs" />
+    <Compile Include="Authentication\UserAuthentication.cs" />
+    <Compile Include="Controller\IController.cs" />
+    <Compile Include="Controller\InventoryController.cs" />
+    <Compile Include="DB\IProductDB.cs" />
+    <Compile Include="DB\IUserDB.cs" />
+    <Compile Include="DB\ProductDb.cs" />
+    <Compile Include="DB\UserDb.cs" />
     <Compile Include="Model\ProductModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Client.cs" />
@@ -52,5 +58,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
