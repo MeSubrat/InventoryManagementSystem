@@ -33,7 +33,7 @@ namespace InventoryManagementSystem
                 "2: Delete a product \n" +
                 "3: Update a product\n" +
                 "4: View product by productId\n" +
-                "5: View all products" +
+                "5: View all products\n" +
                 "6: Delete your account\n" +
                 "7: Logout\n");
         }
@@ -468,7 +468,7 @@ namespace InventoryManagementSystem
                                         break;
                                     //5: View all products
                                     case 5:
-                                        var products = controller.GetAllProducts();
+                                        var products = controller.GetProductsByUserId(loggedInUser.Id);
                                         foreach (var product in products)
                                         {
                                             Console.WriteLine(product.ToString());

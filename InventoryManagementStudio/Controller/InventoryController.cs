@@ -35,7 +35,7 @@ namespace InventoryManagementSystem.Controller
         {
             var product = _productDb.ViewAProductById(productId);
             var result = false;
-            if (product!=null && (_currentUser.isAdmin == true || _currentUser.Id == product.Id))
+            if (product!=null && (_currentUser.isAdmin == true || _currentUser.Id == product.OwnerUserId))
             {
                 result = _productDb.DeleteProduct(productId);
             }
