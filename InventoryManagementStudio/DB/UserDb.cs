@@ -1,8 +1,8 @@
-﻿using InventoryManagementStudio.Model;
+﻿using InventoryManagementSystem.Model;
 using System;
 using System.Collections.Generic;
 
-namespace InventoryManagementStudio.DB
+namespace InventoryManagementSystem.DB
 {
     public class UserDb : IUserDB
     {
@@ -46,6 +46,10 @@ namespace InventoryManagementStudio.DB
         {
             var existingUser = users.Find(user => user.Username == username);
             return existingUser;
+        }
+        public List<UserModel> GetAllUsers()
+        {
+            return users;
         }
     }
 }

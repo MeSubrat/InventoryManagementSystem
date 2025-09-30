@@ -1,8 +1,8 @@
-﻿using InventoryManagementStudio.DB;
-using InventoryManagementStudio.Model;
+﻿using InventoryManagementSystem.DB;
+using InventoryManagementSystem.Model;
 using System;
 
-namespace InventoryManagementStudio.Authentication
+namespace InventoryManagementSystem.Authentication
 {
     public class UserAuthentication
     {

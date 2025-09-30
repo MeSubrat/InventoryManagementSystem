@@ -1,12 +1,12 @@
-﻿using InventoryManagementStudio.DB;
-using InventoryManagementStudio.Model;
+﻿using InventoryManagementSystem.DB;
+using InventoryManagementSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementStudio.Controller
+namespace InventoryManagementSystem.Controller
 {
     internal class InventoryController : IController
     {
@@ -27,7 +27,7 @@ namespace InventoryManagementStudio.Controller
             var result = _productDb.AddProduct(product);
             if (result)
             {
-                Console.WriteLine($"Product Added successfully..Generated user id: {product.Id}");
+                Console.WriteLine($"Product Added successfully..Generated product id: {product.Id}");
             }
             return result;
         }
@@ -35,9 +35,17 @@ namespace InventoryManagementStudio.Controller
         {
             var product = _productDb.ViewAProductById(productId);
             var result = false;
-            if (_currentUser.isAdmin == true || _currentUser.Id == product.Id)
+            if (product!=null && (_currentUser.isAdmin == true || _currentUser.Id == product.Id))
             {
                 result = _productDb.DeleteProduct(productId);
+            }
+            if(result == true)
+            {
+                Console.WriteLine($"{productId} deleted successfully!");
+            }
+            else
+            {
+                Console.WriteLine($"Error while deleting {productId}");
             }
             return result;
         }
@@ -57,9 +65,20 @@ namespace InventoryManagementStudio.Controller
             }
             return products;
         }
+        public ProductModel GetProduct(string productId)
+        {
+            //return _productDb.ViewAProductById(productId);
+            ProductModel requiredProduct =  _productDb.ViewAProductById(productId);
+            if(requiredProduct.OwnerUserId == _currentUser.Id || _currentUser.isAdmin == true)
+            {
+                return _productDb.ViewAProductById(productId);
+            }
+            Console.WriteLine("Unauthorised access!");
+            return null;
+        }
         public List<ProductModel> GetProductsByUserId(string userId)
         {
-            List<ProductModel> products = _productDb.ViewProductsById(_currentUser.Id);
+            List<ProductModel> products = _productDb.ViewProductsByUserId(_currentUser.Id);
             return products;
         }
 
@@ -75,5 +94,65 @@ namespace InventoryManagementStudio.Controller
             return result;
         }
         //Controllers related to User...
+        public bool AddUser(UserModel user)
+        {
+            if(_currentUser.isAdmin == true)
+            {
+                var result = _userDb.CreateUser(user);
+                if(result == true)
+                {
+                    Console.WriteLine("User adedd successfully!");
+                }
+                return result;
+            }
+            Console.WriteLine("You must be an admin to Add an user!");
+            return false;
+        }
+        public UserModel GetUser(string userId)
+        {
+            if(_currentUser.isAdmin == true || _currentUser.Id == userId)
+            {
+                var user = _userDb.ViewUserById(userId);
+                return user;
+            }
+            else
+            {
+                Console.WriteLine("Unauthorised access!");
+                return null;
+            }
+        }
+        public List<UserModel> GetAllUsers()
+        {
+            if(_currentUser.isAdmin == true)
+            {
+                return _userDb.GetAllUsers();
+            }
+            else
+            {
+                Console.WriteLine("Unauthorised Access!");
+                return null;
+            }
+        }
+        public bool UpdateUser(string userId,UserModel userToUpdate)
+        {
+            if(_currentUser.isAdmin == true || _currentUser.Id == userId)
+            {
+                var result = _userDb.UpdateUser(userId, userToUpdate);
+                return result;
+            }
+            Console.WriteLine("Unauthorised access!");
+            return false;
+            
+        }
+        public bool DeleteUser(string userId)
+        {
+            if(_currentUser.isAdmin == true || _currentUser.Id == userId)
+            {
+                var result = _userDb.DeleteUser(userId);
+                return result;
+            }
+            Console.WriteLine("Unauthorised access!");
+            return false;
+        }
     }
 }

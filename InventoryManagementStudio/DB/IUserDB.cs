@@ -1,11 +1,11 @@
-﻿using InventoryManagementStudio.Model;
+﻿using InventoryManagementSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementStudio.DB
+namespace InventoryManagementSystem.DB
 {
     public interface IUserDB
     {
@@ -14,5 +14,6 @@ namespace InventoryManagementStudio.DB
         bool DeleteUser(string userId);
         UserModel ViewUserById(string userId);
         UserModel GetUsername(string username);
+        List<UserModel> GetAllUsers();
     }
 }

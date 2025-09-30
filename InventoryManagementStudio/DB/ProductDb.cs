@@ -1,11 +1,11 @@
-﻿using InventoryManagementStudio.Model;
+﻿using InventoryManagementSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementStudio.DB
+namespace InventoryManagementSystem.DB
 {
     public class ProductDb : IProductDB
     {
@@ -28,7 +28,6 @@ namespace InventoryManagementStudio.DB
             products.Remove(productToDelete);
             return true;
         }
-
         public bool UpdateProduct(string productId, ProductModel productToUpdate)
         {
             ProductModel existingProduct = products.Find(item => item.Id == productId);
@@ -60,12 +59,12 @@ namespace InventoryManagementStudio.DB
         {
             return products;
         }
-        public List<ProductModel> ViewProductsById(string productId)
+        public List<ProductModel> ViewProductsByUserId(string userId)
         {
             List<ProductModel> results = new List<ProductModel>();
             foreach(var product in products)
             {
-                if(product.Id == productId)
+                if(product.OwnerUserId == userId)
                 {
                     results.Add(product);
                 }

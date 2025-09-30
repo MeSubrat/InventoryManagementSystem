@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementStudio.Model
+namespace InventoryManagementSystem.Model
 {
     public class ProductModel
     {

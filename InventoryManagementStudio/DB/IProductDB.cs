@@ -1,22 +1,24 @@
-﻿using InventoryManagementStudio.Model;
+﻿using InventoryManagementSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementStudio.DB
+namespace InventoryManagementSystem.DB
 {
     public interface IProductDB
     {
-        //Creat
+        //Create
         bool AddProduct(ProductModel product);
         //Read
         List<ProductModel> ViewAllProduct();
         //Read a product By Id
         ProductModel ViewAProductById(string productId);
+        //View all products if you are an admin
         List<ProductModel> ViewAllProducts(string productId);
-        List<ProductModel> ViewProductsById(string productId);
+        //View products of any user[Only for admin access]
+        List<ProductModel> ViewProductsByUserId(string userId);
         //Delete Product.
         bool DeleteProduct(string productId);
         //Update Product.
