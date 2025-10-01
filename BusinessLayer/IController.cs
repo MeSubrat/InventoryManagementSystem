@@ -1,6 +1,4 @@
-﻿using InventoryManagementSystem.Model;
-using System.Collections.Generic;
-
+﻿using Common.Lib;
 namespace BusinessLayer
 {
     public interface IController
